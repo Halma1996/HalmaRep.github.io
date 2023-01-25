@@ -120,16 +120,6 @@
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_3">
               <item>
-               <widget class="QLabel" name="Label_NewGoalMessage">
-                <property name="text">
-                 <string/>
-                </property>
-                <property name="alignment">
-                 <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
-                </property>
-               </widget>
-              </item>
-              <item>
                <widget class="QLabel" name="Label_GoalScore">
                 <property name="enabled">
                  <bool>true</bool>

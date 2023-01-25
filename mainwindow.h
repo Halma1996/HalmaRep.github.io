@@ -57,10 +57,6 @@ private:
     ///
     void RefreshNumbers();
     ///
-    /// \brief ShowHideLabel ф-ция меняет текст в NewGoalMessage на пустой или на константную строку cNewGoal
-    ///
-    void ShowHideLabel();
-    ///
     /// \brief Blinking ф-ция морагния, чтоб было видно что цель обновилась
     ///
     void Blinking();
@@ -77,7 +73,6 @@ private:
     void closeEvent(QCloseEvent *event) override;
 
     const QScopedPointer<QTimer> m_p_Timer;
-    const QScopedPointer<QTimer> m_p_Label_Timer;
     const QScopedPointer<NumberWorker> m_p_NumberWorker;
     RandomNumGen m_p_RandomNumGen;
     ///

@@ -6,7 +6,6 @@
 MainWindow::MainWindow(QWidget *parent) //иницилизация
     : QMainWindow(parent),
       m_p_Timer(new QTimer),
-      m_p_Label_Timer(new QTimer),
       m_p_NumberWorker(new NumberWorker),
       m_not_first_try(false),
       ui(new Ui::MainWindow)
@@ -14,7 +13,6 @@ MainWindow::MainWindow(QWidget *parent) //иницилизация
     ui->setupUi(this);
 
     m_p_Timer->setInterval(cTwoSec);
-    m_p_Label_Timer->setInterval(cOneSec);
     this->setStyleSheet(QString("font-size: %1px").arg(32));//!!!!!!!!TO DO для всех, только по-нормальному
 
     ConnectorSignalSlot();
@@ -35,7 +33,6 @@ void MainWindow::ConnectorSignalSlot()
     connect(ui->Butt_Stop,&QPushButton::clicked,this,&MainWindow::EnableDisableButt); //коннектим кнопку Butt_Stop к функции EnableDisabeButt
     //timer
     connect(m_p_Timer.data(),&QTimer::timeout,this,&MainWindow::RefreshNumbers); //коннектим сигнал таймаута к ф-ции RefreshNumbers
-    connect(m_p_Label_Timer.data(),&QTimer::timeout,this,&MainWindow::ShowHideLabel); // коннектим сигнал таймаута к ф-ции ShowHideLabel
     //m_p_NumberWorker
     connect(m_p_NumberWorker.data(),&NumberWorker::clickCounterUpdate,this,&MainWindow::SetClickDone); // коннектим сигнал clickCounterUpdate класса NumberWorker к ф-ции SetClickDone
 }
@@ -50,15 +47,12 @@ void MainWindow::StartGame()
     m_p_NumberWorker.data()->SetCountersZero(); //Вызываем ф-цию SetCountersZero(обнуляет значения переменных) класса NumberWorker
 
     m_p_Timer->start(); //запускаем таймер
-    m_p_Label_Timer->start(); // запускаем таймер для лейбла
     m_not_first_try = false; // присваиваем значение переменной false, чтобы знать что идет 1ая проходка
 }
 
 void MainWindow::StopGame()
 {
     m_p_Timer->stop(); //стопаем таймер
-    m_p_Label_Timer->stop(); // стопаем таймер для лейбла
-    ui->Label_NewGoalMessage->setText(""); // Устанавливаем пустое значение лейблу
     ui->Label_GoalScore->setText(QString(cPurpose).arg(cDash)); // Устанавливаем значение "-" лейблу GoalScore
 }
 
@@ -86,7 +80,6 @@ void MainWindow::RefreshNumbers()
         ui->Label_WinScore->setText(QString(cWin.arg(m_p_NumberWorker.data()->GetCounterWin()))); //гетаем значение в лейбл WinScore
         ui->Label_LoseScore->setText(QString(cLose.arg(m_p_NumberWorker.data()->GetCounterLose()))); //гетаем значение в лейбл LoseScore
         ui->Label_ClickDone->setText(QString(cClickDone).arg(cZero)); // обнуляем значение сделанных кликов
-
     }
     else
     {
@@ -98,12 +91,6 @@ void MainWindow::RefreshNumbers()
     ui->Label_GoalScore->setText(QString(cPurpose).arg(newNumber)); // сетаем сгенерированное значение на лейбл GoalScore
     Blinking(); // вызываем ф-цию моргания
     m_p_NumberWorker.data()->SetGoalScore(newNumber); //вызываем ф-цию SetGoalScore класса NumberWorker
-}
-
-void MainWindow::ShowHideLabel()
-{
-    if (m_not_first_try)
-        ui->Label_NewGoalMessage->text() == "" ? ui->Label_NewGoalMessage->setText(cNewGoal) : ui->Label_NewGoalMessage->setText(""); //В зависимости от содержения поля NewGoalMessage меняем его
 }
 
 void MainWindow::Blinking()
