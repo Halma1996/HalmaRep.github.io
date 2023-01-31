@@ -88,7 +88,7 @@
           </property>
           <layout class="QHBoxLayout" name="horizontalLayout">
            <item>
-            <widget class="QWidget" name="" native="true">
+            <widget class="QWidget" name="widget" native="true">
              <property name="styleSheet">
               <string notr="true">background-color:white</string>
              </property>
@@ -114,7 +114,7 @@
             </widget>
            </item>
            <item>
-            <widget class="QWidget" name="" native="true">
+            <widget class="QWidget" name="widget" native="true">
              <property name="styleSheet">
               <string notr="true">background-color:white</string>
              </property>
@@ -133,7 +133,7 @@
             </widget>
            </item>
            <item>
-            <widget class="QWidget" name="" native="true">
+            <widget class="QWidget" name="widget" native="true">
              <property name="styleSheet">
               <string notr="true">background-color:white</string>
              </property>
@@ -183,7 +183,7 @@
            <string notr="true">background-color:white</string>
           </property>
           <property name="text">
-           <string>Сделано килков:-</string>
+           <string>Сделано кликов:-</string>
           </property>
           <property name="alignment">
            <set>Qt::AlignCenter</set>
